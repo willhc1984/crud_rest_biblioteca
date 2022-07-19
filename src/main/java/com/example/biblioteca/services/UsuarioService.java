@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.example.biblioteca.model.Usuario;
 import com.example.biblioteca.repositories.UsuarioRepository;
-import com.example.campeonato.model.Campeonato;
 
 @Service
 public class UsuarioService {
