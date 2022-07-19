@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -23,7 +24,7 @@ public class Editora implements Serializable{
 	private Integer id;
 	private String nome;
 	
-	@Transient
+	@OneToMany(mappedBy = "editora")
 	private List<Livro> livros = new ArrayList<>();
 	
 	public Editora() {
