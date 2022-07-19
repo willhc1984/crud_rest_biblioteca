@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -29,7 +30,8 @@ public class Emprestimo implements Serializable{
 	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
 	
-	@Transient
+	@ManyToOne
+	@JoinColumn(name = "livro_id")
 	private Livro livro;
 	
 	public Emprestimo() {
