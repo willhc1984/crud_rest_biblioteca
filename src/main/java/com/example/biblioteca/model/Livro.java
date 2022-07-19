@@ -32,11 +32,15 @@ public class Livro implements Serializable{
 	@JoinColumn(name = "editora_id")
 	private Editora editora;
 	
-	@Transient
+	@ManyToOne
+	@JoinColumn(name = "genero_id")
 	private Genero genero;
+	
 	@OneToMany(mappedBy = "livro")
 	private List<Emprestimo> emprestimos = new ArrayList<>();
-	@Transient
+	
+	@ManyToOne
+	@JoinColumn(name = "colecao_id")
 	private Colecao colecao;
 	
 	public Livro() {
