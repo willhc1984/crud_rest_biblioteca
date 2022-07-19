@@ -8,10 +8,16 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.example.biblioteca.model.Colecao;
+import com.example.biblioteca.model.Editora;
 import com.example.biblioteca.model.Emprestimo;
+import com.example.biblioteca.model.Genero;
 import com.example.biblioteca.model.Livro;
 import com.example.biblioteca.model.Usuario;
+import com.example.biblioteca.repositories.ColecaoRepository;
+import com.example.biblioteca.repositories.EditoraRepository;
 import com.example.biblioteca.repositories.EmprestimoRepository;
+import com.example.biblioteca.repositories.GeneroRepository;
 import com.example.biblioteca.repositories.LivroRepository;
 import com.example.biblioteca.repositories.UsuarioRepository;
 
@@ -26,6 +32,15 @@ public class BibliotecaApplication implements CommandLineRunner{
 	
 	@Autowired
 	private LivroRepository livroRepository;
+	
+	@Autowired
+	private GeneroRepository generoRepository;
+	
+	@Autowired
+	private EditoraRepository editoraRepository;
+	
+	@Autowired
+	private ColecaoRepository colecaoRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(BibliotecaApplication.class, args);
@@ -52,7 +67,21 @@ public class BibliotecaApplication implements CommandLineRunner{
 		Livro l4 = new Livro(null, "1984", 765, 3.10);
 		livroRepository.saveAll(Arrays.asList(l1, l2, l3, l4));
 		
+		Genero g1 = new Genero(null, "Ficção");
+		Genero g2 = new Genero(null, "Distopia");
+		Genero g3 = new Genero(null, "Magia");
+		Genero g4 = new Genero(null, "Infantil");
+		generoRepository.saveAll(Arrays.asList(g1, g2, g3, g4));
 		
+		Editora e1 = new Editora(null, "Fantasia");
+		Editora e2 = new Editora(null, "Abril");
+		Editora e3 = new Editora(null, "Globo");
+		Editora e4 = new Editora(null, "Edipro");
+		editoraRepository.saveAll(Arrays.asList(e1, e2, e3, e4));
+		
+		Colecao c1 = new Colecao(null, "Classicos");
+		Colecao c2 = new Colecao(null, "Classicos II");
+		colecaoRepository.saveAll(Arrays.asList(c1, c2));
 		
 		
 	}
