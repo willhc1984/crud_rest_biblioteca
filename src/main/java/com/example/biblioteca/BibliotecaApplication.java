@@ -1,4 +1,4 @@
-package com.example.campeonato;
+package com.example.biblioteca;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

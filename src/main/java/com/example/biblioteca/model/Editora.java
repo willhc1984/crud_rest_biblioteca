@@ -1,30 +1,38 @@
-package com.example.campeonato.model;
+package com.example.biblioteca.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Usuario implements Serializable{
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+@Entity
+@Table(name = "tb_editora")
+public class Editora implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
-	private String telefone;
-	private String email;
 	
-	private List<Emprestimo> emprestimos = new ArrayList<>();
+	@Transient
+	private List<Livro> livros = new ArrayList<>();
 	
-	public Usuario() {
+	public Editora() {
 	}
 
-	public Usuario(Integer id, String nome, String telefone, String email) {
+	public Editora(Integer id, String nome) {
 		super();
 		this.id = id;
 		this.nome = nome;
-		this.telefone = telefone;
-		this.email = email;
 	}
 
 	public Integer getId() {
@@ -42,26 +50,9 @@ public class Usuario implements Serializable{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
-	public String getTelefone() {
-		return telefone;
-	}
-
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
 	
-
-	public List<Emprestimo> getEmprestimos() {
-		return emprestimos;
+	public List<Livro> getLivros() {
+		return livros;
 	}
 
 	@Override
@@ -77,7 +68,7 @@ public class Usuario implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Usuario other = (Usuario) obj;
+		Editora other = (Editora) obj;
 		return Objects.equals(id, other.id);
 	}
 
