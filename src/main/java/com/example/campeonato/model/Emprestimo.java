@@ -12,6 +12,10 @@ public class Emprestimo implements Serializable{
 	private Date dataEmprestimo;
 	private Date dataDevolucao;
 	
+	private Usuario usuario;
+	
+	private Livro livro;
+	
 	public Emprestimo() {
 	}
 
@@ -44,6 +48,22 @@ public class Emprestimo implements Serializable{
 
 	public void setDataDevolucao(Date dataDevolucao) {
 		this.dataDevolucao = dataDevolucao;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public Livro getLivro() {
+		return livro;
+	}
+
+	public void setLivro(Livro livro) {
+		this.livro = livro;
 	}
 
 	@Override

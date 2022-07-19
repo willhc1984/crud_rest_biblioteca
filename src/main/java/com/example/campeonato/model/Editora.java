@@ -1,6 +1,8 @@
 package com.example.campeonato.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Editora implements Serializable{
@@ -9,6 +11,8 @@ public class Editora implements Serializable{
 	
 	private Integer id;
 	private String nome;
+	
+	private List<Livro> livros = new ArrayList<>();
 	
 	public Editora() {
 	}
@@ -33,6 +37,10 @@ public class Editora implements Serializable{
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	
+	public List<Livro> getLivros() {
+		return livros;
 	}
 
 	@Override

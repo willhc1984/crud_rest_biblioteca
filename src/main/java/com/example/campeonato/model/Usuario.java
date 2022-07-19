@@ -1,6 +1,8 @@
 package com.example.campeonato.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Usuario implements Serializable{
@@ -11,6 +13,8 @@ public class Usuario implements Serializable{
 	private String nome;
 	private String telefone;
 	private String email;
+	
+	private List<Emprestimo> emprestimos = new ArrayList<>();
 	
 	public Usuario() {
 	}
@@ -53,6 +57,11 @@ public class Usuario implements Serializable{
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+
+	public List<Emprestimo> getEmprestimos() {
+		return emprestimos;
 	}
 
 	@Override

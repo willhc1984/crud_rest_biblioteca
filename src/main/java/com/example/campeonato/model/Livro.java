@@ -1,6 +1,8 @@
 package com.example.campeonato.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Livro implements Serializable{
@@ -11,6 +13,11 @@ public class Livro implements Serializable{
 	private String titulo;
 	private Integer paginas;
 	private Double valorDeMulta;
+	
+	private Editora editora;
+	private Genero genero;
+	private List<Emprestimo> emprestimos = new ArrayList<>();
+	private Colecao colecao;
 	
 	public Livro() {
 	}
@@ -53,6 +60,34 @@ public class Livro implements Serializable{
 
 	public void setValorDeMulta(Double valorDeMulta) {
 		this.valorDeMulta = valorDeMulta;
+	}
+
+	public Editora getEditora() {
+		return editora;
+	}
+
+	public void setEditora(Editora editora) {
+		this.editora = editora;
+	}
+
+	public Genero getGenero() {
+		return genero;
+	}
+
+	public void setGenero(Genero genero) {
+		this.genero = genero;
+	}
+
+	public List<Emprestimo> getEmprestimos() {
+		return emprestimos;
+	}
+
+	public Colecao getColecao() {
+		return colecao;
+	}
+
+	public void setColecao(Colecao colecao) {
+		this.colecao = colecao;
 	}
 
 	@Override
