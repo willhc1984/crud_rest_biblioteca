@@ -36,7 +36,7 @@ public class EmprestimoService {
 	public Emprestimo atualizar(Integer id, Emprestimo emprestimo) {
 		Emprestimo obj = repository.getOne(id);
 		updateData(obj, emprestimo);
-		return repository.save(emprestimo);
+		return repository.save(obj);
 	}
 
 	private void updateData(Emprestimo obj, Emprestimo emprestimo) {

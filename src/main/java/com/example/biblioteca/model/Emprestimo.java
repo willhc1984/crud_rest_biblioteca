@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "tb_emprestimo")
 public class Emprestimo implements Serializable{
@@ -30,6 +32,7 @@ public class Emprestimo implements Serializable{
 	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "livro_id")
 	private Livro livro;
