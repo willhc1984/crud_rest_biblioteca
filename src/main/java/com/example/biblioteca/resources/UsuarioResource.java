@@ -1,5 +1,6 @@
 package com.example.biblioteca.resources;
 
+import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +13,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.biblioteca.model.Usuario;
+import com.example.biblioteca.repositories.UsuarioRepository;
 import com.example.biblioteca.resources.dto.UsuarioDTO;
 import com.example.biblioteca.services.UsuarioService;
 
@@ -24,19 +27,33 @@ public class UsuarioResource {
 	@Autowired
 	private UsuarioService service;
 	
+	@Autowired
+	private UsuarioRepository usuarioRepository;
+	
 	@GetMapping
-	public List<UsuarioDTO> buscarTodos(){
-		return service.buscarTodos();
+	public ResponseEntity<List<UsuarioDTO>> buscarTodos(){
+		List<UsuarioDTO> usuarios =  service.buscarTodos();
+		return ResponseEntity.ok(usuarios);
 	}
 	
 	@GetMapping(value = "/{id}")
-	public UsuarioDTO buscarPoId(@PathVariable Integer id) {
-		return service.buscarPoId(id);
+	public ResponseEntity<UsuarioDTO> buscarPoId(@PathVariable Integer id) {
+		UsuarioDTO usuario = service.buscarPoId(id);
+		return ResponseEntity.ok(usuario);
 	}
 	
 	@PostMapping
-	public Usuario salvar(@RequestBody Usuario usuario) {
-		return service.salvar(usuario);
+	public ResponseEntity<Usuario> salvar(@RequestBody Usuario usuario) {
+		/*
+		 * usuario = usuarioRepository.findbyEmail(usuario.getEmail()); if(usuario !=
+		 * null) { return ResponseEntity.unprocessableEntity().build(); }
+		 */
+
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+				.buildAndExpand(usuario.getId()).toUri();
+		
+		service.salvar(usuario);
+		return ResponseEntity.created(uri).body(usuario);
 	}
 	
 	@DeleteMapping(value = "/{id}")
