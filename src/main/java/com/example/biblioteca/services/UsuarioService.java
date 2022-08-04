@@ -34,6 +34,7 @@ public class UsuarioService {
 	}
 	
 	public Usuario atualizar(Integer id, Usuario usuario) {
+		@SuppressWarnings("deprecation")
 		Usuario obj = repository.getOne(id);
 		updateData(obj, usuario);
 		return repository.save(obj);
