@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.biblioteca.model.Usuario;
+import com.example.biblioteca.resources.dto.UsuarioDTO;
 import com.example.biblioteca.services.UsuarioService;
 
 @RestController
@@ -24,12 +25,12 @@ public class UsuarioResource {
 	private UsuarioService service;
 	
 	@GetMapping
-	public List<Usuario> buscarTodos(){
+	public List<UsuarioDTO> buscarTodos(){
 		return service.buscarTodos();
 	}
 	
 	@GetMapping(value = "/{id}")
-	public Usuario buscarPoId(@PathVariable Integer id) {
+	public UsuarioDTO buscarPoId(@PathVariable Integer id) {
 		return service.buscarPoId(id);
 	}
 	

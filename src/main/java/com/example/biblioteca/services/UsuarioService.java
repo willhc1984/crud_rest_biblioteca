@@ -1,13 +1,14 @@
 package com.example.biblioteca.services;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.biblioteca.model.Usuario;
 import com.example.biblioteca.repositories.UsuarioRepository;
+import com.example.biblioteca.resources.dto.UsuarioDTO;
 
 @Service
 public class UsuarioService {
@@ -15,14 +16,20 @@ public class UsuarioService {
 	@Autowired
 	private UsuarioRepository repository;
 	
-	public List<Usuario> buscarTodos(){
+	public List<UsuarioDTO> buscarTodos(){
 		List<Usuario> usuarios = repository.findAll();
-		return usuarios;
+		List<UsuarioDTO> usuariosDTO = new ArrayList<>();
+		for(Usuario u : usuarios) {
+			UsuarioDTO usuarioDTO = new UsuarioDTO(u);
+			usuariosDTO.add(usuarioDTO);
+		}
+		return usuariosDTO;
 	}
 	
-	public Usuario buscarPoId(Integer id) {
-		Optional<Usuario> usuario = repository.findById(id);
-		return usuario.get();
+	public UsuarioDTO buscarPoId(Integer id) {
+		Usuario usuario = repository.findById(id).get();
+		UsuarioDTO usuarioDTO = new UsuarioDTO(usuario);
+		return usuarioDTO;
 	}
 	
 	public Usuario salvar(Usuario usuario) {

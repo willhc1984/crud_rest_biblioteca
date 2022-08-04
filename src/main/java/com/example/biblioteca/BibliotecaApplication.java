@@ -49,10 +49,10 @@ public class BibliotecaApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
-		Usuario u1 = new Usuario(null, "José", "1576543425", "jose@gmail.com");
-		Usuario u2 = new Usuario(null, "Maria", "1567890987", "mariae@gmail.com");
-		Usuario u3 = new Usuario(null, "Marcos", "15887652098", "marcos@gmail.com");
-		Usuario u4 = new Usuario(null, "Ana Paula", "15998763651", "anapaula@gmail.com");		
+		Usuario u1 = new Usuario(null, "José", "1576543425", "jose@gmail.com", "123");
+		Usuario u2 = new Usuario(null, "Maria", "1567890987", "mariae@gmail.com", "123");
+		Usuario u3 = new Usuario(null, "Marcos", "15887652098", "marcos@gmail.com", "123");
+		Usuario u4 = new Usuario(null, "Ana Paula", "15998763651", "anapaula@gmail.com", "123");		
 		usuarioRepository.saveAll(Arrays.asList(u1, u2, u3, u4));
 		
 		Emprestimo ep1 = new Emprestimo(null, new Date(), new Date());
@@ -105,8 +105,7 @@ public class BibliotecaApplication implements CommandLineRunner{
 		l3.setColecao(c1);
 		l4.setColecao(c1);		
 		colecaoRepository.saveAll(Arrays.asList(c1, c2));
-		livroRepository.saveAll(Arrays.asList(l1, l2, l3, l4));
-		
+		livroRepository.saveAll(Arrays.asList(l1, l2, l3, l4));	
 	}
 
 }
