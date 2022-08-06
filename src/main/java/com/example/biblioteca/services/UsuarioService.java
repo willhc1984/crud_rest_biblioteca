@@ -51,17 +51,19 @@ public class UsuarioService {
 		repository.deleteById(id);
 	}
 	
-	public Usuario atualizar(Integer id, Usuario usuario) {
+	public UsuarioDTO atualizar(Integer id, UsuarioSalvarDTO dto) {
 		@SuppressWarnings("deprecation")
 		Usuario obj = repository.getOne(id);
-		updateData(obj, usuario);
-		return repository.save(obj);
+		updateData(obj, dto);
+		obj.setPassword(dto.getPassword());
+		obj = repository.save(obj);
+		return new UsuarioDTO(obj);
 	}
 
-	private void updateData(Usuario obj, Usuario usuario) {
-		obj.setNome(usuario.getNome());
-		obj.setEmail(usuario.getEmail());
-		obj.setTelefone(usuario.getTelefone());
+	private void updateData(Usuario obj, UsuarioSalvarDTO dto) {
+		obj.setNome(dto.getNome());
+		obj.setEmail(dto.getEmail());
+		obj.setTelefone(dto.getTelefone());
 	}
 	
 }

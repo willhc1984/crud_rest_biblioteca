@@ -3,6 +3,8 @@ package com.example.biblioteca.resources;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.example.biblioteca.model.Usuario;
 import com.example.biblioteca.model.dto.UsuarioDTO;
 import com.example.biblioteca.model.dto.UsuarioSalvarDTO;
 import com.example.biblioteca.repositories.UsuarioRepository;
@@ -44,7 +45,7 @@ public class UsuarioResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<UsuarioDTO> salvar(@RequestBody UsuarioSalvarDTO dto) {
+	public ResponseEntity<UsuarioDTO> salvar(@Valid @RequestBody UsuarioSalvarDTO dto) {
 		/*
 		 * usuario = usuarioRepository.findbyEmail(usuario.getEmail()); if(usuario !=
 		 * null) { return ResponseEntity.unprocessableEntity().build(); }
@@ -63,9 +64,9 @@ public class UsuarioResource {
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Usuario> atualizar(@PathVariable Integer id, @RequestBody Usuario usuario){
-		usuario = service.atualizar(id, usuario);
-		return ResponseEntity.ok().body(usuario);
+	public ResponseEntity<UsuarioDTO> atualizar(@PathVariable Integer id, @RequestBody UsuarioSalvarDTO dto){
+		UsuarioDTO newDto = service.atualizar(id, dto);
+		return ResponseEntity.ok().body(newDto);
 	}
 
 }

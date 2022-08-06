@@ -1,12 +1,19 @@
 package com.example.biblioteca.model.dto;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 import com.example.biblioteca.model.Usuario;
 
 public class UsuarioDTO {
 	
 	private Integer id;
+	@NotBlank(message = "Valor não pode ser nulo ou vazio.")
 	private String nome;
+	@Size(min = 8, max = 16, message = "Campo deve ter entre 9 e 16 caracteres")
 	private String telefone;
+	@Email(message = "Campos de email inválido.")
 	private String email;
 	
 	public UsuarioDTO() {
