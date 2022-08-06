@@ -1,4 +1,4 @@
-package com.example.biblioteca.resources.dto;
+package com.example.biblioteca.model.dto;
 
 import com.example.biblioteca.model.Usuario;
 
@@ -8,6 +8,9 @@ public class UsuarioDTO {
 	private String nome;
 	private String telefone;
 	private String email;
+	
+	public UsuarioDTO() {
+	}
 	
 	public UsuarioDTO(Integer id, String nome, String telefone, String email) {
 		super();

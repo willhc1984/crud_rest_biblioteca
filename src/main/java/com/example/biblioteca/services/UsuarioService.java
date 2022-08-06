@@ -7,8 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.biblioteca.model.Usuario;
+import com.example.biblioteca.model.dto.UsuarioDTO;
+import com.example.biblioteca.model.dto.UsuarioSalvarDTO;
 import com.example.biblioteca.repositories.UsuarioRepository;
-import com.example.biblioteca.resources.dto.UsuarioDTO;
 
 @Service
 public class UsuarioService {
@@ -32,10 +33,20 @@ public class UsuarioService {
 		return usuarioDTO;
 	}
 	
-	public Usuario salvar(Usuario usuario) {
-		return repository.save(usuario);
+	public UsuarioDTO salvar(UsuarioSalvarDTO dto) {
+		Usuario entity = new Usuario();
+		copyToEntity(dto, entity);
+		entity.setPassword(dto.getPassword());
+		entity = repository.save(entity);
+		return new UsuarioDTO(entity);
 	}
 	
+	private void copyToEntity(UsuarioDTO dto, Usuario entity) {
+		entity.setNome(dto.getNome());
+		entity.setEmail(dto.getEmail());
+		entity.setTelefone(dto.getTelefone());
+	}
+
 	public void apagar(Integer id) {
 		repository.deleteById(id);
 	}

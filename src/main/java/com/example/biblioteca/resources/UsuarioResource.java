@@ -16,8 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.biblioteca.model.Usuario;
+import com.example.biblioteca.model.dto.UsuarioDTO;
+import com.example.biblioteca.model.dto.UsuarioSalvarDTO;
 import com.example.biblioteca.repositories.UsuarioRepository;
-import com.example.biblioteca.resources.dto.UsuarioDTO;
 import com.example.biblioteca.services.UsuarioService;
 
 @RestController
@@ -43,17 +44,16 @@ public class UsuarioResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Usuario> salvar(@RequestBody Usuario usuario) {
+	public ResponseEntity<UsuarioDTO> salvar(@RequestBody UsuarioSalvarDTO dto) {
 		/*
 		 * usuario = usuarioRepository.findbyEmail(usuario.getEmail()); if(usuario !=
 		 * null) { return ResponseEntity.unprocessableEntity().build(); }
 		 */
-
+		UsuarioDTO newDto = service.salvar(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(usuario.getId()).toUri();
+				.buildAndExpand(newDto.getId()).toUri();
 		
-		service.salvar(usuario);
-		return ResponseEntity.created(uri).body(usuario);
+		return ResponseEntity.created(uri).body(newDto);
 	}
 	
 	@DeleteMapping(value = "/{id}")
