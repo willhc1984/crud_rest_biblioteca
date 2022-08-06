@@ -10,6 +10,7 @@ import com.example.biblioteca.model.Usuario;
 import com.example.biblioteca.model.dto.UsuarioDTO;
 import com.example.biblioteca.model.dto.UsuarioSalvarDTO;
 import com.example.biblioteca.repositories.UsuarioRepository;
+import com.example.biblioteca.services.exceptions.EntityNotFoundException;
 
 @Service
 public class UsuarioService {
@@ -27,10 +28,11 @@ public class UsuarioService {
 		return usuariosDTO;
 	}
 	
-	public UsuarioDTO buscarPoId(Integer id) {
-		Usuario usuario = repository.findById(id).get();
-		UsuarioDTO usuarioDTO = new UsuarioDTO(usuario);
-		return usuarioDTO;
+	public UsuarioDTO buscarPorId(Integer id) {
+		Usuario usuario = repository.findById(id).orElseThrow(
+				() -> new EntityNotFoundException("Id não encontrado - " + id));
+		UsuarioDTO dto = new UsuarioDTO(usuario);
+		return dto;
 	}
 	
 	public UsuarioDTO salvar(UsuarioSalvarDTO dto) {

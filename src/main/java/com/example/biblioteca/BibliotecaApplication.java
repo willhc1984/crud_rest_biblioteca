@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Import;
 
 import com.example.biblioteca.model.Colecao;
 import com.example.biblioteca.model.Editora;
@@ -20,6 +21,7 @@ import com.example.biblioteca.repositories.EmprestimoRepository;
 import com.example.biblioteca.repositories.GeneroRepository;
 import com.example.biblioteca.repositories.LivroRepository;
 import com.example.biblioteca.repositories.UsuarioRepository;
+import com.example.biblioteca.resources.exceptions.ResourceExceptionHandler;
 
 @SpringBootApplication
 public class BibliotecaApplication implements CommandLineRunner{

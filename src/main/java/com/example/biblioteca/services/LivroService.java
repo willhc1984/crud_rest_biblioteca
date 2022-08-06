@@ -1,7 +1,8 @@
 package com.example.biblioteca.services;
 
 import java.util.List;
-import java.util.Optional;
+
+import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,8 +22,9 @@ public class LivroService {
 	}
 	
 	public Livro buscarPoId(Integer id) {
-		Optional<Livro> livro = repository.findById(id);
-		return livro.get();
+		Livro livro = repository.findById(id).orElseThrow(
+				() -> new EntityNotFoundException("Id não encontrado " + id));
+		return livro;
 	}
 	
 	public Livro salvar(Livro livro) {

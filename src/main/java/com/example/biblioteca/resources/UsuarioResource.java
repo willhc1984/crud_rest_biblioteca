@@ -25,25 +25,25 @@ import com.example.biblioteca.services.UsuarioService;
 @RestController
 @RequestMapping(value = "/usuarios")
 public class UsuarioResource {
-	
+
 	@Autowired
 	private UsuarioService service;
-	
+
 	@Autowired
 	private UsuarioRepository usuarioRepository;
-	
+
 	@GetMapping
-	public ResponseEntity<List<UsuarioDTO>> buscarTodos(){
-		List<UsuarioDTO> usuarios =  service.buscarTodos();
+	public ResponseEntity<List<UsuarioDTO>> buscarTodos() {
+		List<UsuarioDTO> usuarios = service.buscarTodos();
 		return ResponseEntity.ok(usuarios);
 	}
-	
+
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<UsuarioDTO> buscarPoId(@PathVariable Integer id) {
-		UsuarioDTO usuario = service.buscarPoId(id);
-		return ResponseEntity.ok(usuario);
+	public ResponseEntity<UsuarioDTO> buscarPorId(@PathVariable Integer id) {
+		UsuarioDTO dto = service.buscarPorId(id);
+		return ResponseEntity.ok().body(dto);
 	}
-	
+
 	@PostMapping
 	public ResponseEntity<UsuarioDTO> salvar(@Valid @RequestBody UsuarioSalvarDTO dto) {
 		/*
@@ -51,20 +51,19 @@ public class UsuarioResource {
 		 * null) { return ResponseEntity.unprocessableEntity().build(); }
 		 */
 		UsuarioDTO newDto = service.salvar(dto);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(newDto.getId()).toUri();
-		
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newDto.getId()).toUri();
+
 		return ResponseEntity.created(uri).body(newDto);
 	}
-	
+
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Void> apagar(@PathVariable Integer id){
+	public ResponseEntity<Void> apagar(@PathVariable Integer id) {
 		service.apagar(id);
 		return ResponseEntity.noContent().build();
 	}
-	
+
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<UsuarioDTO> atualizar(@PathVariable Integer id, @RequestBody UsuarioSalvarDTO dto){
+	public ResponseEntity<UsuarioDTO> atualizar(@PathVariable Integer id, @RequestBody UsuarioSalvarDTO dto) {
 		UsuarioDTO newDto = service.atualizar(id, dto);
 		return ResponseEntity.ok().body(newDto);
 	}
