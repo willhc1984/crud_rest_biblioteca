@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.example.biblioteca.model.Usuario;
 import com.example.biblioteca.model.dto.UsuarioDTO;
 import com.example.biblioteca.model.dto.UsuarioSalvarDTO;
 import com.example.biblioteca.repositories.UsuarioRepository;
+import com.example.biblioteca.services.exceptions.DataBaseException;
 import com.example.biblioteca.services.exceptions.EntityNotFoundException;
 
 @Service
@@ -17,24 +19,24 @@ public class UsuarioService {
 
 	@Autowired
 	private UsuarioRepository repository;
-	
-	public List<UsuarioDTO> buscarTodos(){
+
+	public List<UsuarioDTO> buscarTodos() {
 		List<Usuario> usuarios = repository.findAll();
 		List<UsuarioDTO> usuariosDTO = new ArrayList<>();
-		for(Usuario u : usuarios) {
+		for (Usuario u : usuarios) {
 			UsuarioDTO usuarioDTO = new UsuarioDTO(u);
 			usuariosDTO.add(usuarioDTO);
 		}
 		return usuariosDTO;
 	}
-	
+
 	public UsuarioDTO buscarPorId(Integer id) {
-		Usuario usuario = repository.findById(id).orElseThrow(
-				() -> new EntityNotFoundException("Id não encontrado - " + id));
+		Usuario usuario = repository.findById(id)
+				.orElseThrow(() -> new EntityNotFoundException("Id não encontrado - " + id));
 		UsuarioDTO dto = new UsuarioDTO(usuario);
 		return dto;
 	}
-	
+
 	public UsuarioDTO salvar(UsuarioSalvarDTO dto) {
 		Usuario entity = new Usuario();
 		copyToEntity(dto, entity);
@@ -42,7 +44,7 @@ public class UsuarioService {
 		entity = repository.save(entity);
 		return new UsuarioDTO(entity);
 	}
-	
+
 	private void copyToEntity(UsuarioDTO dto, Usuario entity) {
 		entity.setNome(dto.getNome());
 		entity.setEmail(dto.getEmail());
@@ -50,9 +52,14 @@ public class UsuarioService {
 	}
 
 	public void apagar(Integer id) {
-		repository.deleteById(id);
+		try {
+			repository.deleteById(id);
+		} catch (EmptyResultDataAccessException e) {
+			throw new DataBaseException("Id não encontrado - " + id);
+		}
+		
 	}
-	
+
 	public UsuarioDTO atualizar(Integer id, UsuarioSalvarDTO dto) {
 		@SuppressWarnings("deprecation")
 		Usuario obj = repository.getOne(id);
@@ -67,5 +74,5 @@ public class UsuarioService {
 		obj.setEmail(dto.getEmail());
 		obj.setTelefone(dto.getTelefone());
 	}
-	
+
 }
