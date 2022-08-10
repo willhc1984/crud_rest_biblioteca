@@ -9,5 +9,7 @@ import com.example.biblioteca.model.Usuario;
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer>{
 
 	//Usuario findbyEmail(String email);
+	
+	Usuario findByEmail(String email);
 
 }

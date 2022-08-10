@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import com.example.biblioteca.model.Usuario;
 import com.example.biblioteca.model.dto.UsuarioDTO;
@@ -41,8 +43,12 @@ public class UsuarioService {
 		Usuario entity = new Usuario();
 		copyToEntity(dto, entity);
 		entity.setPassword(dto.getPassword());
-		entity = repository.save(entity);
-		return new UsuarioDTO(entity);
+		try {
+			repository.save(entity);
+			return new UsuarioDTO(entity);
+		} catch (DataIntegrityViolationException e) {
+			throw new DataBaseException("Email ja existe");
+		}
 	}
 
 	private void copyToEntity(UsuarioDTO dto, Usuario entity) {
@@ -55,18 +61,23 @@ public class UsuarioService {
 		try {
 			repository.deleteById(id);
 		} catch (EmptyResultDataAccessException e) {
-			throw new DataBaseException("Id não encontrado - " + id);
+			throw new EntityNotFoundException("Id não encontrado - " + id);
+		} catch (DataIntegrityViolationException e) {
+			e.printStackTrace();
+			throw new DataBaseException("Usuario possui emprestimos");
 		}
-		
 	}
 
 	public UsuarioDTO atualizar(Integer id, UsuarioSalvarDTO dto) {
-		@SuppressWarnings("deprecation")
-		Usuario obj = repository.getOne(id);
-		updateData(obj, dto);
-		obj.setPassword(dto.getPassword());
-		obj = repository.save(obj);
-		return new UsuarioDTO(obj);
+		try {
+			Usuario obj = repository.getReferenceById(id);
+			updateData(obj, dto);
+			obj.setPassword(dto.getPassword());
+			obj = repository.save(obj);
+			return new UsuarioDTO(obj);
+		} catch (Exception e) {
+			throw new EntityNotFoundException("Id não encontrado - " + id);
+		}
 	}
 
 	private void updateData(Usuario obj, UsuarioSalvarDTO dto) {

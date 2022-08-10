@@ -30,8 +30,8 @@ public class ResourceExceptionHandler {
 	public ResponseEntity<StandardError> emptyResult(DataBaseException e, HttpServletRequest request) {
 		StandardError err = new StandardError();
 		err.setTimestamp(Instant.now());
-		err.setStatus(HttpStatus.NOT_FOUND.value());
-		err.setError("Resource not found");
+		err.setStatus(HttpStatus.UNPROCESSABLE_ENTITY.value());
+		err.setError("Erro de integridade de chave");
 		err.setMessage(e.getMessage());
 		err.setPath(request.getRequestURI());
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(err);

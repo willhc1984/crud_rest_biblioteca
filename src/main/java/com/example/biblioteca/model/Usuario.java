@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.Constraint;
+
+import org.hibernate.annotations.Check;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -26,6 +30,7 @@ public class Usuario implements Serializable{
 	private Integer id;
 	private String nome;
 	private String telefone;
+	@Column(unique = true)
 	private String email;
 	private String password;
 	

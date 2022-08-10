@@ -45,11 +45,7 @@ public class UsuarioResource {
 	}
 
 	@PostMapping
-	public ResponseEntity<UsuarioDTO> salvar(@Valid @RequestBody UsuarioSalvarDTO dto) {
-		/*
-		 * usuario = usuarioRepository.findbyEmail(usuario.getEmail()); if(usuario !=
-		 * null) { return ResponseEntity.unprocessableEntity().build(); }
-		 */
+	public ResponseEntity<UsuarioDTO> salvar(@Valid @RequestBody UsuarioSalvarDTO dto) {		
 		UsuarioDTO newDto = service.salvar(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newDto.getId()).toUri();
 		return ResponseEntity.created(uri).body(newDto);
@@ -62,7 +58,7 @@ public class UsuarioResource {
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<UsuarioDTO> atualizar(@PathVariable Integer id, @RequestBody UsuarioSalvarDTO dto) {
+	public ResponseEntity<UsuarioDTO> atualizar(@PathVariable Integer id, @Valid @RequestBody UsuarioSalvarDTO dto) {
 		UsuarioDTO newDto = service.atualizar(id, dto);
 		return ResponseEntity.ok().body(newDto);
 	}
