@@ -17,7 +17,7 @@ public class EmprestimoService {
 	
 	public List<Emprestimo> buscarTodos(){
 		List<Emprestimo> emprestimos = repository.findAll();
-		return emprestimos;
+		return emprestimos;		
 	}
 	
 	public Emprestimo buscarPorId(Integer id) {

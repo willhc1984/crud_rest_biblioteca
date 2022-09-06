@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.biblioteca.model.Emprestimo;
+import com.example.biblioteca.model.dto.EmprestimoDTO;
 import com.example.biblioteca.services.EmprestimoService;
 
 @RestController
