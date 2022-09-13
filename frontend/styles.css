@@ -6,8 +6,8 @@
   }
   
   html,
-  body,
-  #root{
+  body
+  {
     background-color: #efefef;
     height: 100%;  
   }

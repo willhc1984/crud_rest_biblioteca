@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.example.biblioteca.model.Usuario;
 import com.example.biblioteca.model.dto.UsuarioDTO;
 import com.example.biblioteca.model.dto.UsuarioSalvarDTO;
 import com.example.biblioteca.repositories.UsuarioRepository;
@@ -63,6 +65,12 @@ public class UsuarioResource {
 	public ResponseEntity<UsuarioDTO> atualizar(@PathVariable Integer id, @Valid @RequestBody UsuarioSalvarDTO dto) {
 		UsuarioDTO newDto = service.atualizar(id, dto);
 		return ResponseEntity.ok().body(newDto);
+	}
+	
+	@GetMapping(value = "/buscarPorNome")
+	public ResponseEntity<List<Usuario>> buscarPorNome(@RequestParam String nome){
+		List<Usuario> usuarios = usuarioRepository.buscarPorNome(nome);
+		return ResponseEntity.ok(usuarios);		
 	}
 
 }

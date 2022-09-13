@@ -18,7 +18,6 @@ async function getData() {
     temp += "<td>Visualizar</td>";
     temp += "</tr>";
 
-
     for (i = 0; i < length; i++) {
         temp += "<tr>";
         temp += "<td>" + data[i].id + "</td>";

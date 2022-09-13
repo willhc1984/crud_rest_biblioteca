@@ -8,7 +8,7 @@ form.addEventListener('submit', function (e) {
     var telefone = document.getElementById('telefone').value;
     var email = document.getElementById('email').value;
     var password = document.getElementById('password').value;
-    
+
     fetch('http://localhost:8080/usuarios', {
         method: 'POST',
         body: JSON.stringify({
@@ -25,14 +25,14 @@ form.addEventListener('submit', function (e) {
             if (response.ok) {
                 responseOk();
             } else {
-                responseError();
+                responseError(msg);
+                console.log(response);
+                return response.json();
             }
-            return response.json();
         })
         .then(function (data) {
-            console.log(data);
-            msg = '' + data.errors[0];
-
+            console.log(data.errors[3].defaultMessage);
+            msg += data.errors[3].defaultMessage;
         }).catch(error => {
             //console.log(error);
         });
@@ -45,12 +45,13 @@ function responseOk() {
     temp += '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
     temp += '</div>';
     document.getElementById("alert").innerHTML = temp;
+    document.getElementById("form").reset();
 }
 
-function responseError() {
+function responseError(msg) {
     var temp = "";
     temp += "<div class='alert alert-danger alert-dismissible fade show' role='alert'>";
-    temp += "    <strong>Erro de validação!";
+    temp += "    <strong>Erro de validação! Corrija seus dados.";
     temp += "   <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>";
     temp += "</div>";
     document.getElementById("alert").innerHTML = temp;
