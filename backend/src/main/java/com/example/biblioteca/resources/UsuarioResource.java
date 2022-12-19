@@ -69,7 +69,7 @@ public class UsuarioResource {
 	
 	@GetMapping(value = "/buscarPorNome")
 	public ResponseEntity<List<Usuario>> buscarPorNome(@RequestParam String nome){
-		List<Usuario> usuarios = usuarioRepository.buscarPorNome(nome);
+		List<Usuario> usuarios = usuarioRepository.buscarPorNome(nome.trim().toUpperCase());
 		return ResponseEntity.ok(usuarios);		
 	}
 
