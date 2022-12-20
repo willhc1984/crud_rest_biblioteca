@@ -9,7 +9,7 @@ function Editora(){
             <Navbar />
             <form className={styles.form}>
                 <h3>Cadastro de editora:</h3>
-                <input type='number' className='form-control' name='nome' placeholder='Nome da editora' />
+                <input type='text' className='form-control' name='nome' placeholder='Nome da editora' />
                 <input type='button' className='btn btn-primary' value='Cadastrar' />
             </form>
             <Footer />

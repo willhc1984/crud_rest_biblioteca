@@ -18,17 +18,6 @@ function Navbar(){
                     </li>
                     <li className="nav-item dropdown">
                     <a className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Cadastros
-                    </a>
-                    <ul className="dropdown-menu">
-                        <li><a className="dropdown-item" href="/livros">Livro</a></li>
-                        <li><a className="dropdown-item" href="/editoras">Editora</a></li>
-                        <li><a className="dropdown-item" href="/generos">Gênero</a></li>
-                        <li><a className="dropdown-item" href="/colecoes">Coleção</a></li>
-                    </ul>
-                    </li>
-                    <li className="nav-item dropdown">
-                    <a className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Emprestimos
                     </a>
                     <ul className="dropdown-menu">
@@ -38,13 +27,27 @@ function Navbar(){
                     </li>
                     <li className="nav-item dropdown">
                     <a className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Usuarios
+                        Cadastros
                     </a>
                     <ul className="dropdown-menu">
-                        <li><a className="dropdown-item" href="/usuarios">Action</a></li>
-                        <li><a className="dropdown-item" href="/usuarios">Another action</a></li>
-                        <li><hr className="dropdown-divider" /></li>
-                        <li><a className="dropdown-item" href="/usuarios">Something else here</a></li>
+                        <li><a className="dropdown-item" href="/livros">Livro</a></li>
+                        <li><a className="dropdown-item" href="/editoras">Editora</a></li>
+                        <li><a className="dropdown-item" href="/generos">Gênero</a></li>
+                        <li><a className="dropdown-item" href="/colecoes">Coleção</a></li>
+                        <li><a className="dropdown-item" href="/usuarios">Usuarios</a></li>
+                    </ul>
+                    </li>
+                    <li className="nav-item dropdown">
+                    <a className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Registros
+                    </a>
+                    <ul className="dropdown-menu">
+                        <li><a className="dropdown-item" href="/">Emprestimos</a></li>
+                        <li><a className="dropdown-item" href="/">Livros</a></li>
+                        <li><a className="dropdown-item" href="/editorastabela">Editoras</a></li>
+                        <li><a className="dropdown-item" href="/">Coleções</a></li>
+                        <li><a className="dropdown-item" href="/">Generos</a></li>
+                        <li><a className="dropdown-item" href="/">Usuarios</a></li>
                     </ul>
                     </li>
                 </ul>

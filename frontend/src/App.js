@@ -6,6 +6,7 @@ import Usuarios from "./pages/usuarios";
 import Editora from "./pages/editoras";
 import Generos from "./pages/generos";
 import Colecoes from "./pages/colecoes";
+import EditoraTabela from "./pages/editoras_tabela";
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
         <Route path="/colecoes" element={<Colecoes />} />
         <Route path="/usuarios" element={<Usuarios />} />
         <Route path="/emprestimos" element={<Emprestimos />} />
+        <Route path="/editorastabela" element={<EditoraTabela />} />
       </Routes>
     </Router>
   );
