@@ -1,5 +1,5 @@
 import { IoLibraryOutline } from 'react-icons/io5';
-import { FcLibrary } from 'react-icons/fc';
+
 
 function Navbar(){
 
@@ -18,24 +18,22 @@ function Navbar(){
                     </li>
                     <li className="nav-item dropdown">
                     <a className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Emprestimos
+                        Cadastros
                     </a>
                     <ul className="dropdown-menu">
-                        <li><a className="dropdown-item" href="/emprestimos">Action</a></li>
-                        <li><a className="dropdown-item" href="/emprestimos">Another action</a></li>
-                        <li><hr className="dropdown-divider" /></li>
-                        <li><a className="dropdown-item" href="/emprestimos">Something else here</a></li>
+                        <li><a className="dropdown-item" href="/livros">Livro</a></li>
+                        <li><a className="dropdown-item" href="/editoras">Editora</a></li>
+                        <li><a className="dropdown-item" href="/generos">Gênero</a></li>
+                        <li><a className="dropdown-item" href="/colecoes">Coleção</a></li>
                     </ul>
                     </li>
                     <li className="nav-item dropdown">
                     <a className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Livros
+                        Emprestimos
                     </a>
                     <ul className="dropdown-menu">
-                        <li><a className="dropdown-item" href="/livros">Action</a></li>
-                        <li><a className="dropdown-item" href="/livros">Another action</a></li>
-                        <li><hr className="dropdown-divider" /></li>
-                        <li><a className="dropdown-item" href="/livros">Something else here</a></li>
+                        <li><a className="dropdown-item" href="/emprestimos">Registrar</a></li>
+                        <li><a className="dropdown-item" href="/emprestimos">Visualizar</a></li>
                     </ul>
                     </li>
                     <li className="nav-item dropdown">
