@@ -4,6 +4,7 @@ import { RiDeleteBin2Fill } from 'react-icons/ri';
 import { RiEdit2Fill } from 'react-icons/ri';
 import { SlMagnifierAdd } from 'react-icons/sl';
 import { useEffect, useState } from "react";
+import styles from "./formcad.module.css";
 
 function EditoraTabela(){
 
@@ -31,9 +32,9 @@ function EditoraTabela(){
         <div>
             <Navbar />
             <h3 align="center" style={{padding:"20px"}}>Editoras cadastradas:</h3>
-            <table className="table container">
+            <table className="table" style={{width:"800px", align:"center", margin:"auto"}}>
             <thead>
-                <tr>
+                <tr align="center">
                 <th scope="col">#</th>
                 <th scope="col">Nome da editora</th>
                 <th scope="col">Ações</th>
@@ -42,7 +43,7 @@ function EditoraTabela(){
             <tbody>
                 {
                     editoras.map((editora, indice) => (
-                        <tr key={indice}>
+                        <tr key={indice} align="center">
                             <td>{editora.id}</td>
                             <td>{editora.nome}</td>
                             <td>
