@@ -1,3 +1,6 @@
+import { IoLibraryOutline } from 'react-icons/io5';
+import { FcLibrary } from 'react-icons/fc';
+
 function Navbar(){
 
     return(
@@ -9,7 +12,9 @@ function Navbar(){
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                     <li className="nav-item">
-                    <a className="nav-link active" aria-current="page" href="/">Home</a>
+                    <a class="navbar-brand" href="/">
+                        <IoLibraryOutline style={{ fontSize: "1.5em"}} />
+                    </a>
                     </li>
                     <li className="nav-item dropdown">
                     <a className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">

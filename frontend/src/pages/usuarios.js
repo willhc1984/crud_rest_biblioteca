@@ -1,3 +1,4 @@
+import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 
 function Usuarios(){
@@ -6,6 +7,7 @@ function Usuarios(){
         <div>
             <Navbar />
             <h1>Usuarios</h1>
+            <Footer />
         </div>
         
     )

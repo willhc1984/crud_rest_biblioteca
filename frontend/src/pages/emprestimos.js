@@ -1,3 +1,4 @@
+import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 
 function Emprestimos(){
@@ -6,6 +7,7 @@ function Emprestimos(){
         <div>
             <Navbar />
             <h1>Emprestimos</h1>
+            <Footer />
         </div>
     )
 
