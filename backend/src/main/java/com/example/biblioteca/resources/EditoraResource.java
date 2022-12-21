@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.biblioteca.model.Editora;
 import com.example.biblioteca.services.EditoraService;
 
-@CrossOrigin("*")
 @RestController
 @RequestMapping(value = "/editoras")
 public class EditoraResource {

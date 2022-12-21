@@ -15,6 +15,7 @@ function EditoraTabela(){
 
     //useState
     const [editoras, setEditoras] = useState([]);
+    const [objEditora, setObjEditora] = useState(editora);
 
     //UseEffect - buscar dados
     useEffect(() => {
@@ -27,6 +28,23 @@ function EditoraTabela(){
     .then(retorno => retorno.json())
     .then((retorno_convertido) => setEditoras(retorno_convertido));
     }, []);
+
+    //Exluir editora
+    const remover = () => {
+        fetch('http://localhost:8080/editoras/' + objEditora.id, {
+        method: 'delete',
+        headers: {
+            'Content-type':'application/json',
+            'Accept':'application/json'
+        }
+    })
+    .then(() => {
+        alert('Editora excluida!');
+        console.log(objEditora);
+        console.log(objEditora.id);
+        console.log(editoras);
+        })
+    }
 
     return(
         <div>
@@ -49,7 +67,7 @@ function EditoraTabela(){
                             <td>
                                 <a href="/"><SlMagnifierAdd style={{ fontSize:"1.2em", margin:".2em" }}/></a>
                                 <a href="/"><RiEdit2Fill style={{ fontSize:"1.2em", margin:".2em" }}/></a>
-                                <a href="/"><RiDeleteBin2Fill style={{ fontSize:"1.2em", margin:".2em" }}/></a>
+                                <a href="#" onClick={remover}><RiDeleteBin2Fill style={{ fontSize:"1.2em", margin:".2em" }}/></a>
                             </td>
                         </tr>
                     ))
