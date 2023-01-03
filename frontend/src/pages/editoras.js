@@ -23,9 +23,17 @@ function Editora(){
                 'Accept':'application/json',
             }
         })
-        .then(retorno => retorno,json())
+        .then(retorno => retorno.json())
         .then(retorno_convertido => {
-            alert("Editora cadastrada!")
+            if(retorno_convertido.nome){
+                alert("Editora cadastrada!");
+            }else{
+                alert("Erro ao cadastrar!");
+            }
+            console.log(retorno_convertido);
+        })
+        .catch((retorno) => {
+            alert("Erro: servidor pode estar off-line!");
         })
     }
 
