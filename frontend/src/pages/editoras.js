@@ -27,6 +27,7 @@ function Editora(){
         .then(retorno_convertido => {
             if(retorno_convertido.nome){
                 alert("Editora cadastrada!");
+                limparFormulario();
             }else{
                 alert("Erro ao cadastrar!");
             }
@@ -37,8 +38,14 @@ function Editora(){
         })
     }
 
+    //Obter dados do formulario
     const aoDigitar = (e) => {
         setObjEditora({...objEditora, [e.target.name]:e.target.value});
+    }
+
+    //Limpar formulario
+    const limparFormulario = () => {
+        setObjEditora(editora);
     }
 
     return(
