@@ -6,7 +6,7 @@ import Usuarios from "./pages/usuarios";
 import Editora from "./pages/editoras";
 import Generos from "./pages/generos";
 import Colecoes from "./pages/colecoes";
-import EditoraTabela from "./pages/editoras_tabela";
+import EditoraTabela from "./components/TableEditora";
 
 function App() {
 
