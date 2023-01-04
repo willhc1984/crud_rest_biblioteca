@@ -3,6 +3,8 @@ package com.example.biblioteca.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,17 +22,17 @@ public class EditoraService {
 		return editoras;
 	}
 	
-	public Editora buscarPoId(Integer id) {
-		Optional<Editora> editora = repository.findById(id);
-		return editora.get();
+	public Optional<Editora> buscarPorId(Integer id) {
+		return repository.findById(id);
 	}
 	
 	public Editora salvar(Editora editora) {
 		return repository.save(editora);
 	}
 	
-	public void apagar(Integer id) {
-		repository.deleteById(id);
+	@Transactional
+	public void apagar(Editora editora) {
+		repository.delete(editora);
 	}
 	
 	public Editora atualizar(Integer id, Editora editora) {

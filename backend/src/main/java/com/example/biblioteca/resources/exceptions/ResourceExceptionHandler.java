@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -31,6 +32,12 @@ public class ResourceExceptionHandler {
 		});
 		
 		return list;
+	}
+	
+	@ResponseStatus(HttpStatus.CONFLICT)
+	@ExceptionHandler
+	public String handle(DataIntegrityViolationException exception) {
+		return "Erro de integridade de dados!";
 	}
 	
 	@ExceptionHandler(EntityNotFoundException.class)

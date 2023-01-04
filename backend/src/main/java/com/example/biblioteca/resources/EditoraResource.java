@@ -1,6 +1,7 @@
 package com.example.biblioteca.resources;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -29,13 +30,17 @@ public class EditoraResource {
 	private EditoraService service;
 	
 	@GetMapping
-	public List<Editora> buscarTodos(){
-		return service.buscarTodos();
+	public ResponseEntity<List<Editora>> buscarTodos(){
+		return ResponseEntity.status(HttpStatus.OK).body(service.buscarTodos());
 	}
 	
 	@GetMapping(value = "/{id}")
-	public Editora buscarPoId(@PathVariable Integer id) {
-		return service.buscarPoId(id);
+	public ResponseEntity<Object> buscarPoId(@PathVariable Integer id) {
+		Optional<Editora> editoraOptional = service.buscarPorId(id);
+		if(!editoraOptional.isPresent()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Editora não encontrada!");
+		}
+		return ResponseEntity.status(HttpStatus.OK).body(editoraOptional.get());
 	}
 	
 	@PostMapping
@@ -46,9 +51,13 @@ public class EditoraResource {
 	}
 	
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Void> apagar(@PathVariable Integer id){
-		service.apagar(id);
-		return ResponseEntity.noContent().build();
+	public ResponseEntity<Object> apagar(@PathVariable Integer id){
+		Optional<Editora> editoraOptional = service.buscarPorId(id);
+		if(!editoraOptional.isPresent()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Editora não encontrada!");
+		}
+		service.apagar(editoraOptional.get());
+		return ResponseEntity.status(HttpStatus.OK).body("Editora excluida!");
 	}
 	
 	@PutMapping(value = "/{id}")
