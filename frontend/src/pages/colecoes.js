@@ -1,6 +1,6 @@
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import styles from "./formcad.module.css";
+import styles from "../components/formcad.module.css";
 
 function Colecoes(){
 

@@ -23,7 +23,14 @@ public class ResourceExceptionHandler {
 	
 	@ResponseStatus(HttpStatus.CONFLICT)
 	@ExceptionHandler(MethodArgumentNotValidException.class)
-	public List<ValidationError> handle(MethodArgumentNotValidException exception) {
+	public ResponseEntity<StandardError> handle(MethodArgumentNotValidException exception, HttpServletRequest request) {
+		StandardError err = new StandardError();
+		err.setTimestamp(Instant.now());
+		err.setStatus(HttpStatus.CONFLICT.value());
+		err.setError("Erro de integridade de dados!");
+		err.setMessage(exception.getMessage());
+		err.setPath(request.getRequestURI());
+		
 		List<FieldError> fieldErrorList = exception.getBindingResult().getFieldErrors();
 		List<ValidationError> list = new ArrayList<>();
 		
@@ -31,13 +38,21 @@ public class ResourceExceptionHandler {
 			list.add(new ValidationError(error.getField(), error.getDefaultMessage()));
 		});
 		
-		return list;
+		err.setValidations(list);
+		
+		return ResponseEntity.status(HttpStatus.CONFLICT).body(err);
 	}
 	
 	@ResponseStatus(HttpStatus.CONFLICT)
 	@ExceptionHandler
-	public String handle(DataIntegrityViolationException exception) {
-		return "Erro de integridade de dados!";
+	public ResponseEntity<StandardError> handle(DataIntegrityViolationException e, HttpServletRequest request) {
+		StandardError err = new StandardError();
+		err.setTimestamp(Instant.now());
+		err.setStatus(HttpStatus.CONFLICT.value());
+		err.setError("Erro de integridade de dados!");
+		err.setMessage(e.getMessage());
+		err.setPath(request.getRequestURI());
+		return ResponseEntity.status(HttpStatus.CONFLICT).body(err);
 	}
 	
 	@ExceptionHandler(EntityNotFoundException.class)

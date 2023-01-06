@@ -7,7 +7,6 @@ public class ValidationError implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
-	private String titulo = "Erro de validação";
 	private String campo;
 	private String mensagem;
 

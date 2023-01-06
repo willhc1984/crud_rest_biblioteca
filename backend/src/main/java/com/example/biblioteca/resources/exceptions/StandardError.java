@@ -2,6 +2,7 @@ package com.example.biblioteca.resources.exceptions;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.List;
 
 public class StandardError implements Serializable{
 	
@@ -12,6 +13,7 @@ public class StandardError implements Serializable{
 	private String error;
 	private String path;
 	private String message;
+	private List<ValidationError> validations;
 	
 	public StandardError() {
 	}
@@ -54,6 +56,14 @@ public class StandardError implements Serializable{
 
 	public void setMessage(String message) {
 		this.message = message;
+	}
+
+	public List<ValidationError> getValidations() {
+		return validations;
+	}
+
+	public void setValidations(List<ValidationError> validations) {
+		this.validations = validations;
 	}
 
 }

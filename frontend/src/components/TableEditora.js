@@ -18,7 +18,7 @@ function TableEditora({vetor, selecionar}){
                         <tr key={indice} align="center">
                             <td>{editora.id}</td>
                             <td>{editora.nome}</td>
-                            <td><button className='btn btn-success' onClick={() => {selecionar(indice)}} >Selecionar</button></td>
+                            <td><button className='btn btn-success' onClick={() => {selecionar(indice)}}>Selecionar</button></td>
                         </tr>
                     ))
                 }

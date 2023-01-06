@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import { json } from "react-router-dom";
 import Footer from "../components/Footer";
+import FormEditora from "../components/FormEditora";
 import Navbar from "../components/Navbar";
 import TableEditora from "../components/TableEditora";
-import styles from "./formcad.module.css";
 
 function Editora(){
 
@@ -15,6 +14,18 @@ function Editora(){
     const [editoras, setEditoras] = useState([]);
     const [btnCadastrar, setBtnCadastrar] = useState(true);
     const [objEditora, setObjEditora] = useState(editora);
+
+    //UseEffect - buscar dados
+    useEffect(() => {
+        fetch('http://localhost:8080/editoras', {
+        headers: {
+            'Content-type':'application/json',
+            'Accept':'application/json',
+            }
+        })
+    .then(retorno => retorno.json())
+    .then((retorno_convertido) => setEditoras(retorno_convertido));
+    }, []);
 
     //Cadastrar editora
     const cadastrar = () => {
@@ -30,6 +41,7 @@ function Editora(){
         .then(retorno_convertido => {
             if(retorno_convertido.nome){
                 alert("Editora cadastrada!");
+                setEditoras([...editoras, retorno_convertido])
                 limparFormulario();
             }else{
                 alert("Erro ao cadastrar!");
@@ -41,18 +53,6 @@ function Editora(){
         })
     }
 
-     //UseEffect - buscar dados
-     useEffect(() => {
-        fetch('http://localhost:8080/editoras', {
-            headers: {
-                'Content-type':'application/json',
-                'Accept':'application/json',
-              }
-        })
-    .then(retorno => retorno.json())
-    .then((retorno_convertido) => setEditoras(retorno_convertido));
-    }, []);
-
     //Exluir editora
     const remover = (indice) => {
         fetch('http://localhost:8080/editoras/' + objEditora.id, {
@@ -62,20 +62,42 @@ function Editora(){
             'Accept':'application/json'
         }
     })
-    .then(() => {
-        alert('Editora excluida!');
-        console.log(objEditora);
-        console.log(objEditora.id);
-        console.log(editoras);
+    .then((response) => {
+        console.log(response.status);
+    })
+    .then((response) => {
+        if(response.ok){
+            alert('Editora excluida!');
+            //Copia vetor de editoras
+            let vetorTemp = [...editoras];
+            console.log(vetorTemp);
+            //Indice
+            let indice = vetorTemp.findIndex((p) => {
+                return p.id === objEditora.id;
+            })
+            console.log(indice);
+            //Remove editora do vetorTemp
+            vetorTemp.splice(indice, 1);
+            //Atualiza vetor de editoras
+            setEditoras(vetorTemp);
+            //Limpa formulario
+            limparFormulario();
+        }else{
+            alert('Erro ao excluir: ' + response);
+            console.log(response);
+            }
+        })
+        .catch(e => {
+            alert('Erro: servidor off-line!');
         })
     }
 
     //Selecionar editora na table
     const selecionarEditora = (indice) => {
+        console.log(indice);
         setObjEditora(editoras[indice]);
-        setBtnCadastrar(false);
         //console.log(objEditora);
-        //console.log(editoras);
+        setBtnCadastrar(false);
     }
 
     //Obter dados do formulario
@@ -92,24 +114,8 @@ function Editora(){
     return(
         <div>
             <Navbar />
-            <form className={styles.form}>
-                <h3>Cadastro de editora:</h3>
-                <input type='text' className='form-control' name='nome'  onChange={aoDigitar} value={objEditora.nome} placeholder='Nome da editora' />
-                
-                {
-                    btnCadastrar
-                    ?
-                    <input type='button' className='btn btn-primary' value='Cadastrar' onClick={cadastrar} />
-                    :
-                    <div>
-                        <input type='button' className='btn btn-warning' value='Alterar' onClick={cadastrar} />
-                        <input type='button' className='btn btn-danger' value='Remover' onClick={remover} />
-                        <input type='button' className='btn btn-secondary' value='Cancelar' onClick={limparFormulario} />
-                    </div>
-                    
-                }
-                
-            </form>
+            <FormEditora btnCadastrar={btnCadastrar} aoDigitar={aoDigitar} objEditora={objEditora} 
+                cadastrar={cadastrar} remover={remover} limparFormulario={limparFormulario} />
             <TableEditora vetor={editoras} selecionar={selecionarEditora} />
             <Footer />
         </div>
