@@ -27,7 +27,7 @@ public class ResourceExceptionHandler {
 		StandardError err = new StandardError();
 		err.setTimestamp(Instant.now());
 		err.setStatus(HttpStatus.CONFLICT.value());
-		err.setError("Erro de integridade de dados!");
+		err.setError("Erro de validação de dados!");
 		err.setMessage(exception.getMessage());
 		err.setPath(request.getRequestURI());
 		

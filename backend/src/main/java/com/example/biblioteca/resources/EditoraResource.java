@@ -57,7 +57,7 @@ public class EditoraResource {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Editora não encontrada!");
 		}
 		service.apagar(editoraOptional.get());
-		return ResponseEntity.status(HttpStatus.OK).body("Editora excluida!");
+		return ResponseEntity.status(HttpStatus.OK).body(editoraOptional.get());
 	}
 	
 	@PutMapping(value = "/{id}")
