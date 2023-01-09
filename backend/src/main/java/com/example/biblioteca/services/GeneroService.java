@@ -3,6 +3,8 @@ package com.example.biblioteca.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,17 +22,17 @@ public class GeneroService {
 		return generos;
 	}
 	
-	public Genero buscarPoId(Integer id) {
-		Optional<Genero> genero = repository.findById(id);
-		return genero.get();
+	public Optional<Genero> buscarPoId(Integer id) {
+		return repository.findById(id);
 	}
 	
 	public Genero salvar(Genero genero) {
 		return repository.save(genero);
 	}
 	
-	public void apagar(Integer id) {
-		repository.deleteById(id);
+	@Transactional
+	public void apagar(Genero genero) {
+		repository.delete(genero);
 	}
 	
 	public Genero atualizar(Integer id, Genero genero) {

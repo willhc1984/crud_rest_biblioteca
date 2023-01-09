@@ -45,9 +45,8 @@ function Editora(){
                 setEditoras([...editoras, retorno_convertido])
                 limparFormulario();
             }else{
-                alert("Erro ao cadastrar!");
+                alert("Erro ao cadastrar!" + JSON.stringify(retorno_convertido.validations));
             }
-            console.log(retorno_convertido);
         })
         .catch((retorno) => {
             alert("Erro: servidor pode estar off-line!");
@@ -119,7 +118,7 @@ function Editora(){
             limparFormulario();
         })
         .catch(e =>{
-            alert('Unauthorized access!');
+            alert('Erro: servidor off-line!');
         });
     }
 
